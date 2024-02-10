@@ -6,6 +6,9 @@ module.exports = {
       brightness: {},
       colors: {},
     },
+    fontFamily: {
+      inter: ["Inter", "sans-serif"],
+    },
   },
   plugins: [],
 };
