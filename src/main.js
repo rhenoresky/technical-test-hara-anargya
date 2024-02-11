@@ -5,6 +5,7 @@ import App from "./App.vue";
 import { Icon } from "@iconify/vue";
 import Dashboard from "./views/Dashboard.vue";
 import Overview from "./views/Overview.vue";
+import NotFound from "./views/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -18,6 +19,11 @@ const router = createRouter({
       path: "/overview",
       name: "Overview",
       component: Overview,
+    },
+    {
+      path: "/:catchAll(.*)",
+      name: "NotFound",
+      component: NotFound,
     },
   ],
 });
