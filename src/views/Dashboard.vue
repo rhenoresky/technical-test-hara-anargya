@@ -25,8 +25,6 @@ const detailClick = (user) => {
 
 onMounted(async () => {
   await getUsers();
-
-  console.log(users);
 });
 </script>
 
@@ -200,17 +198,19 @@ onMounted(async () => {
                   <td>{{ user.job }}</td>
                   <td class="text-[#080808]">{{ user.country }}</td>
                   <td>
-                    <Button
-                      class="px-3 py-2 bg-white text-[#080808] drop-shadow"
-                    >
-                      Select
-                    </Button>
-                    <Button
-                      @click="detailClick(user)"
-                      class="px-3 py-2 bg-white text-[#080808] drop-shadow"
-                    >
-                      View Detail
-                    </Button>
+                    <div class="flex gap-1">
+                      <Button
+                        class="px-3 py-2 bg-white text-[#080808] drop-shadow"
+                      >
+                        Select
+                      </Button>
+                      <Button
+                        @click="detailClick(user)"
+                        class="px-3 py-2 bg-white text-[#080808] drop-shadow"
+                      >
+                        View Detail
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -219,7 +219,69 @@ onMounted(async () => {
         </section>
       </div>
     </div>
-    <Modal :show="showModal" @close="showModal = !showModal" :user="dataUser" />
+    <Modal :show="showModal" @close="showModal = !showModal">
+      <div class="flex flex-col w-full gap-8 p-2">
+        <div class="flex items-center justify-center w-full gap-6">
+          <div class="w-[160px] rounded-full overflow-hidden drop-shadow">
+            <img
+              :src="dataUser.profile_picture"
+              alt="Image"
+              class="object-cover object-center w-full"
+            />
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-medium text-[32px]">
+              {{ `${dataUser.first_name} ${dataUser.last_name}` }}
+            </h4>
+            <p class="font-medium text-[16px]">{{ dataUser.email }}</p>
+            <p class="font-medium text-[16px]">{{ dataUser.phone }}</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-center gap-8">
+          <div class="flex flex-col order-2 gap-2">
+            <p class="font-medium">
+              Gender: <span class="text-slate-500">{{ dataUser.gender }}</span>
+            </p>
+            <p class="font-medium">
+              Job: <span class="text-slate-500">{{ dataUser.job }}</span>
+            </p>
+            <p class="font-medium">
+              City: <span class="text-slate-500">{{ dataUser.city }}</span>
+            </p>
+            <p class="font-medium">
+              Country:
+              <span class="text-slate-500">{{ dataUser.country }}</span>
+            </p>
+            <p class="font-medium">
+              Date of birth:
+              <span class="text-slate-500">{{
+                new Date(dataUser.date_of_birth).toISOString().substring(0, 10)
+              }}</span>
+            </p>
+          </div>
+          <div class="flex flex-col order-1 gap-2">
+            <p class="font-medium">
+              State: <span class="text-slate-500">{{ dataUser.state }}</span>
+            </p>
+            <p class="font-medium">
+              Street: <span class="text-slate-500">{{ dataUser.street }}</span>
+            </p>
+            <p class="font-medium">
+              Zip code:
+              <span class="text-slate-500">{{ dataUser.zipcode }}</span>
+            </p>
+            <p class="font-medium">
+              Latitude:
+              <span class="text-slate-500">{{ dataUser.latitude }}</span>
+            </p>
+            <p class="font-medium">
+              Longitude:
+              <span class="text-slate-500">{{ dataUser.longitude }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
